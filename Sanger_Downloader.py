@@ -106,6 +106,7 @@ if __name__ == "__main__":
     HTMLFile = open(html_file, "r")
     index = HTMLFile.read()
     Soup_code = BeautifulSoup(index, 'lxml')
+    get_chrome_version()
     try:
         if platform == "linux" or platform == "linux2" or platform == "darwin":
             browser = webdriver.Chrome('./chromedriver')
