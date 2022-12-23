@@ -91,7 +91,7 @@ def get_chrome_version():
 
     request.urlretrieve(link_download+version_download.text +
                         download_path, "chromedriver.zip")
-    with zipfile.ZipFile("chromedriver_linux64.zip", 'r') as zip_ref:
+    with zipfile.ZipFile("chromedriver.zip", 'r') as zip_ref:
         extract_all_with_permission(zip_ref, ".")
 
 
