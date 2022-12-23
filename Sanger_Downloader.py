@@ -4,6 +4,7 @@ import codecs
 from bs4 import BeautifulSoup
 import os
 import re
+import sys
 from sys import platform
 from urllib import request
 import zipfile
@@ -112,9 +113,9 @@ if __name__ == "__main__":
             browser = webdriver.Chrome('./chromedriver')
         elif platform == "win32":
             browser = webdriver.Chrome('./chromedriver.exe')
-    except Exception:
-        print("Can not detect platform OS. (script support Mac,Linux,Window")
-    finally:    
         for i in Soup_code.findAll("a", attrs={"class": "download-link"}):
             print(i["href"])
             browser.get(i["href"])
+    except Exception:
+        print("Can not detect platform OS. (script support Mac,Linux,Window")
+        sys.exit(0)
