@@ -2,5 +2,9 @@
     "mac64_chromedriver_108.0.5359_for_108.0.5359": {
         "timestamp": "23/12/2022",
         "binary_path": "./.wdm/drivers/chromedriver/mac64/108.0.5359/chromedriver"
+    },
+    "win32_chromedriver_108.0.5359_for_108.0.5359": {
+        "timestamp": "30/12/2022",
+        "binary_path": ".\\.wdm\\drivers\\chromedriver\\win32\\108.0.5359\\chromedriver.exe"
     }
 }
