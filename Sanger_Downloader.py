@@ -2,11 +2,11 @@ import argparse
 
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from selenium.common.exceptions import TimeoutException, JavascriptException
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.common.exceptions import TimeoutException
+from webdriver_manager.chrome import ChromeDriverManager
 
 
 def every_downloads_chrome(driver):
@@ -39,10 +39,12 @@ if __name__ == "__main__":
     if args.download_directory != "":
         chrome_options.add_experimental_option("prefs", {'download.default_directory': args.download_directory})
     chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
+    chrome_options.add_argument('--disable-gpu')
     browser = webdriver.Chrome(service=Service(ChromeDriverManager(path=r".").install()), options=chrome_options)
     browser.execute_script("window.open('about:blank','TabDownload');")
-    #num_tab = 2
+    num_file = 1
     for i in Soup_code.findAll("a", attrs={"class": "download-link"}):
+        print("file ", num_file)
         print(i["href"])
         browser.get(i["href"])
         flag = 0
@@ -52,10 +54,7 @@ if __name__ == "__main__":
                 paths = WebDriverWait(browser, time_wait, 1).until(every_downloads_chrome)
                 print(paths)
                 flag = 1
-            except TimeoutException:
+            except (TimeoutException, JavascriptException):
                 flag = 0
                 time_wait = time_wait + 600
-        #windows_name = "Tab" + str(num_tab)
-        #browser.execute_script("window.open('about:blank','%s');" % windows_name)
-        #browser.switch_to.window(windows_name)
-        #num_tab = num_tab + 1
+        num_file = num_file + 1
